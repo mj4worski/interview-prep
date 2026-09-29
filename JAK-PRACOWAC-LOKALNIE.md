@@ -59,5 +59,6 @@ Edytujesz `src/interview/p01/LongestSubstring.java`, odpalasz testy, wrzucasz mi
 | `05-behavioral.md` | STAR + exit story |
 | `06-cheat-sheet.md` | 20 min przed |
 | `07-kafka-aws-k8s.md` | stack z ogłoszenia |
-| `08-java17-21.md` | records, VT |
+| `08-java17-21.md` | records, VT, mechanizm + linki |
+| `09-materialy.md` | mapa linków i limity czasu na 14 dni |
 | `coding/` | P01–P07 + testy |
