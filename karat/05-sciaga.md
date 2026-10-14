@@ -28,6 +28,9 @@ My hypothesis is ___. I'll change that one thing and rerun.
 - Pieniądze: `long` w groszach, cięcie po kropce, dokładnie dwie cyfry. Zero jest legalne.
 - `equals` i `hashCode` po tym samym polu. Najpierw hash, potem equals. Sam `equals` nie naprawia `HashSet`.
 - Na końcu: `O(n)` na przejście, `O(n)` na mapę, `O(n log n)` jak sortujesz klucze.
+- Najpierw plan, potem kod. Ich test, nie własny `toString`.
+- „Anything else?”: drugi risk, nie dłuższy opis pierwszego.
+- W logu są tylko wysłane notyfikacje: nieudane to różnica listy „miało pójść” i listy „doszło”.
 
 ## JDK
 

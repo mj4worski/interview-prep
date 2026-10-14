@@ -17,6 +17,13 @@ I'd know it worked when ___.
 
 Jak proszą „to zaprojektuj”, dopisz tylko: gdzie leży stan i co jest synchroniczne, a co idzie obok commitu. Potem przestań. Nie rysuj dwunastu pudełek i nie zaczynaj od Kafki albo Kubernetesa.
 
+Jak mówią „anything else?”, dokładaj drugi konkretny risk, nie głębszy opis tego samego. W relacjach z tej części ludzie dostają cztery albo pięć wklejonych promptów, a interviewer zbiera listę, nie jeden rysunek.
+
+Dwa braki, których nie ma w scenariuszach niżej, a wracają w relacjach:
+
+- Logujesz tylko wysłane notyfikacje. Nieudanych nie ma w logu, więc nie da się ich wygrepać. Lista id, które miały pójść, minus lista id, które doszły, to są te nieudane. Od teraz zapis próby powstaje przed wysyłką, razem z porażką.
+- Licznik, który dziś liczysz skanem dużej tabeli relacji (znajomi, polubienia). Trzymaj go przy rekordzie i aktualizuj przy zapisie. Cache na ten licznik, nie na całe skanowanie.
+
 Liczby podawaj tylko gdy oni podali liczby, albo jeden rząd wielkości, który zmienia decyzję („to nie wejdzie w ten sam Postgres”). Nie udawaj kalkulatora.
 
 Najpierw powiedz swoją wersję na głos. Wzorzec pod scenariuszem czytaj dopiero potem. Jak Twoja wersja ma te cztery zdania i konkretną zmianę, jest dobra, nawet gdy słownictwo jest inne.
