@@ -1,5 +1,7 @@
 # Java, którą piszesz bez szukania
 
+Tabela do druku jest w `karat/05-sciaga.md`, sekcja JDK. Tu zostają dłuższe przykłady.
+
 Tylko tyle. Reszta biblioteki Javy nie wchodzi w 30 minut. Przy W1 możesz tu zerkać. Od K2 pisz z głowy.
 
 ## Map i zliczanie
