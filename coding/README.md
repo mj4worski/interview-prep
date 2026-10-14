@@ -1,6 +1,14 @@
 # Kod pod Karat
 
-Java 21 lokalnie, kod pisany tak, żeby przeszedł też na starszym JDK (bez records).
+Java 21 lokalnie, kod pisany tak, żeby przeszedł też na JDK 11 (bez records).
+
+`invalid flag: --release` znaczy, że `javac` na PATH to jeszcze ósemka. Na Macu:
+
+```bash
+brew install --cask temurin@21
+```
+
+`./run.sh` sam weźmie ten JDK (`/usr/libexec/java_home -v 21`), nawet gdy `java -version` nadal pokazuje 1.8. Sprawdzenie: `./run.sh --jdk`.
 
 ```bash
 cd coding
