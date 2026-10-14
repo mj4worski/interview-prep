@@ -1,17 +1,21 @@
-# Coding do — 40 minut, Java 21, bez Mavena
+# Kod pod Karat
+
+Java 21 lokalnie, kod pisany tak, żeby przeszedł też na starszym JDK (bez records).
 
 ```bash
 cd coding
-./run.sh P01    # jeden zestaw testów
-./run.sh        # wszystkie
+./run.sh W1
+./run.sh K1A     # bug
+./run.sh K1B     # parse
+./run.sh K1C     # agregacja
+./run.sh K2A
+./run.sh K3      # mock 30 min
 ```
 
-Teoria wzorców (mechanizm, nie sama ściąga) jest w `../02-coding-patterns.md`. Linki i limity czasu: `../09-materialy.md`. Rozwiązań z internetu nie otwieraj przed własnymi 40 minutami.
+Edytujesz pliki w `src/karat/`. Testów nie ruszasz.
 
-Zasady jak na HackerRank:
+`solutions/` dopiero po zegarze. Protokół: `../karat/03-kod-30.md`.
 
-1. Włącz zegar 40 min zanim otworzysz plik.
-2. Najpierw komentarz u góry: własne słowa, przykład, złożoność-cel.
-3. Koduj w `src/interview/pXX/*.java`. Nie ruszaj asercji.
-4. Jak przechodzi: wrzuć kod + 5 zdań narracji.
-5. Po 40 min albo po Twoim wrzucie — recenzja jak na rozmowie.
+`src/interview/p01` … `p07` to stary zestaw. Nie na ten screen. `./run.sh P01`.
+
+Teoria wzorców na później, nie na dzisiejszy zegar: `../02-coding-patterns.md` i `../09-materialy.md`.

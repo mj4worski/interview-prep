@@ -1,3 +1,7 @@
+# Nie na screen Karat
+
+Kod na tej rozmowie to bug, parse i agregacja: `coding/` W1, K1, K2, K3 oraz `karat/03-kod-30.md`. Wzorce poniżej są na późniejszą rundę algorytmiczną, jeśli w ogóle przyjdzie.
+
 # Coding — 12 wzorców, nie 200 zadań
 
 Na HackerRank / LeetCode w 40 minut wygrywa ten, kto rozpoznaje wzorzec w 2 minuty i komunikuje.

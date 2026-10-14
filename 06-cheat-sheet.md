@@ -1,3 +1,7 @@
+# Stary cheat sheet — nie na Karat
+
+Na screen Karat czytasz tylko `karat/05-sciaga.md`. To, co jest niżej, jest na rozmowę z zespołem po screenie.
+
 # Ściąga na 20 minut przed rozmową
 
 Ten plik zostaje krótki. Teoria, przykłady i linki są w `01`–`05`, `07`, `08` i w mapie `09-materialy.md`. Tutaj tylko kotwice, które masz powiedzieć, gdy głowa jest pusta.
