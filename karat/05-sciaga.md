@@ -25,13 +25,29 @@ My hypothesis is ___. I'll change that one thing and rerun.
 ```
 
 - Tylko status ze specu wchodzi do sumy. Reszta jest w danych po to, żeby Cię złapać.
-- `"SETTLED".equals(status)`, nie `==`.
 - Pieniądze: `long` w groszach, cięcie po kropce, dokładnie dwie cyfry. Zero jest legalne.
-- `split(",", -1)`, potem `trim`. Zły `parseInt` łap i rzuć `IllegalArgumentException`.
-- Mapa po dwóch polach: `a + "\0" + b`.
-- Rate: `(double) a / b`.
 - `equals` i `hashCode` po tym samym polu. Najpierw hash, potem equals. Sam `equals` nie naprawia `HashSet`.
 - Na końcu: `O(n)` na przejście, `O(n)` na mapę, `O(n log n)` jak sortujesz klucze.
+
+## JDK
+
+| Potrzebujesz | Piszesz |
+|---|---|
+| gdzie jest kropka | `s.indexOf('.')` |
+| drugi raz od tego miejsca | `s.indexOf('.', from)` |
+| kawałek tekstu | `s.substring(begin, end)` |
+| podział linii | `line.split(",", -1)` albo `line.split("\\|", -1)` |
+| spacje przy polu | `s.trim()` |
+| pusto | `s.isBlank()` |
+| cyfra | `Character.isDigit(c)` |
+| liczba | `Long.parseLong(s)`, `Integer.parseInt(s)` |
+| zły format liczby | łapiesz `NumberFormatException`, rzucasz `IllegalArgumentException` |
+| status | `"SETTLED".equals(status)` |
+| zliczanie | `map.merge(key, 1, Integer::sum)` |
+| wiersz na konto | `map.computeIfAbsent(account, k -> new long[3])` |
+| klucz z dwóch pól | `userId + "\0" + template` |
+| rate | `(double) errors / hits` |
+| klucze do sortowania | `new ArrayList<>(map.keySet())`, potem `Collections.sort(ids)` |
 
 ## Zdanie, gdy zostaje minuta
 
