@@ -1,91 +1,62 @@
-# Plan 14 dni — Java 17/21, Spring Boot, Kafka, AWS, K8s
+# Karat — Backend Engineer (GCB4 / GCB5)
 
-Profil: 11 lat, 6 lat w jednej firmie, senior backend.
-Cel: rdza z live codingu, prowadzenie system designu, stack z ogłoszenia na poziomie rozmowy — nie CKA i nie certyfikat AWS.
+To jest screen na **karat.com**, nie rozmowa system-design na 45 minut i nie LeetCode. Stary plan 14 dni (Kafka, AWS, Kubernetes, P01–P07) zostaje w repo na etap **po** tym screenie. Przed Karatem go nie rób.
 
-Założenie czasu: **2–3 h w dzień roboczy, 4 h w weekend**. Razem ~35 h. Wystarczy. Więcej godzin nie pomaga, jeśli nie mówisz na głos.
+Zakładam Goldman Sachs Polska: w przeglądarce była zakładka `KARAT_POLAND_GS`. Rubryka jest ważniejsza niż logo. Jak to inna firma, i tak trenujemy to, co jest na screenach.
 
-Kolejność stała:
+## Czy odpalać to repo w IDE?
 
+Tak. Otwórz **ten katalog** w Cursorze albo IntelliJ i pracuj w terminalu w `coding/`.
+
+Na prawdziwej rozmowie swojego IDE nie będzie. Kod piszesz w przeglądarce, w **Karat Studio**. Dlatego ostatni trening (K3) zrób bez podpowiedzi z Copilota.
+
+Nie zaczynaj od `P01`. Start:
+
+```bash
+cd coding
+./run.sh W1
 ```
-Coding → System design → Spring/SQL → Kafka/AWS/K8s → Behavioral → Mocks
-```
 
----
+## Co jest na screenach
 
-## Kalendarz
+Godzina z interviewerem Karat (nie z Goldmanem). Z tego **50 minut** jest oceniane. Intro jest poza tym czasem.
 
-### Tydzień 1 — mięsień i rama
+| | System design | Kod: Develop and Update Backend Code |
+|---|---|---|
+| Czas | 20 min | 30 min |
+| GCB4 | 50%, max 300. Słabości, SPOF, fault tolerance, skala, spójność, bezpieczeństwo, dane, integracje | 50%, max 300, **próg 60** |
+| GCB5 | 40%, max 240. Skala i duży ruch, modele spójności, load balancing, wąskie gardła, storage, notyfikacje | 60%, max 360, **próg 72** |
 
-| Dzień | Blok A (główny) | Blok B (45–60 min) | Done gdy |
-|-------|-----------------|--------------------|----------|
-| **1** | Coding: wzorce 1–4 + P01, P02 na czas | Java 17/21 ściąga (`08`) | 2 zadania + recap na głos |
-| **2** | Coding: wzorce 5–8 + P03, P04 | Java core: equals, pule, ConcurrentHashMap | 2 medium w ≤40 min |
-| **3** | **System design:** rama + URL shortener + rate limiter | Spring: `@Transactional`, proxy, N+1 | 45 min design na głos, nagrany albo do lustra |
-| **4** | Coding: grafy/intervale/LRU — P05, P06, P07 | SQL: indeksy, isolation, cursor pagination | LRU z głowy bez googla |
-| **5** | **Design:** chat + news feed | Spring Boot produkcja: health, config, OSIV | 2 designy po 35–40 min |
-| **6** | **Kafka Pareto** (`07`) + design: powiadomienia / order pipeline | Outbox, idempotencja, lag, rebalance | Umiesz narysować outbox i powiedzieć at-least-once |
-| **7** | Mock coding 40 min + recap tygodnia | Behavioral: 3 historie STAR (impact, awaria, konflikt) | Wiesz, co Cię spowolniło w kodzie |
+Umiejętności kodu są **te same** na obu poziomach:
 
-### Tydzień 2 — stack, mocks, sprzedaż
+- struktury danych i obiektówka
+- metody do parsowania i agregacji, plus debug
+- bugi w gotowym kodzie
 
-| Dzień | Blok A | Blok B | Done gdy |
-|-------|--------|--------|----------|
-| **8** | **AWS Pareto** + design: upload plików (S3 presign, CloudFront) | RDS Multi-AZ vs replica, SQS vs Kafka | 45 min design na AWS |
-| **9** | **K8s Pareto** + Spring na klastrze | probes, HPA, rolling, requests/limits | Umiesz powiedzieć liveness vs readiness na przykładzie |
-| **10** | **Design:** booking/inventory + SQL locking | Grill Java/Spring/SQL na głos | Booking bez double-sell |
-| **11** | **Mock #1 pełny:** coding 40 + design 45 | Recenzja słabych punktów | Notatka: 3 rzeczy do poprawy |
-| **12** | Dziury z mocka + Kafka/AWS grill | Behavioral: 6 STAR + exit po 6 latach | Historie z liczbami na kartce |
-| **13** | **Mock #2 trudniejszy:** design (feed albo „Uber lite”) + coding | Pytania do nich | Drugi mock czystszy niż pierwszy |
-| **14** | Tylko `06-cheat-sheet.md` + 1 easy warmup | Sen. Nic nowego. | Świeża głowa |
+Suma punktów to 600. Próg 60 albo 72 to 20% sekcji kodu: poniżej tego screen odpada, ale sam próg nie wystarcza, żeby przejść. Na dole ekranu są progi rekomendacji (further review / next round / tech touch). Ze screena nie da się uczciwie odczytać procentów, więc nie celuj w „60 punktów”. Celuj w zielone testy na dwóch pełnych częściach i domkniętą trzecią.
 
----
+Spring, Hibernate i Kafka **nie są** na tej rubryce. Kod to zwykła Java: klasy, `List`, `Map`, parsowanie linii, bug w metodzie, która już jest. Framework może paść później, na rozmowie z zespołem. Tu wystarczy, że w designie powiesz „zapis i wysyłka nie mogą być w jednym try/catch po commicie”.
 
-## Priorytet stacku z ogłoszenia
+## Kolejność, jak masz mało czasu
 
-Must (padnie albo jako pytanie, albo wewnątrz designu):
+Jedna sesja to około 2 godziny. Mów na głos. Po angielsku, jeśli rekruter nie powiedział, że rozmowa jest po polsku. Karat zwykle prowadzi po angielsku.
 
-- Java 17: records, sealed, switch/pattern matching, text blocks
-- Java 21: virtual threads — kiedy tak, kiedy nie
-- Spring Boot: beans, `@Transactional`, Data JPA N+1, actuator, config
-- Kafka: partycje, consumer group, offset, at-least-once, idempotent producer, outbox, lag
-- AWS: IAM role, S3, ALB, RDS, SQS/SNS, ECS vs EKS w 60 s
-- K8s: Pod/Deploy/Service, probes, resources, rolling update
+1. **Dziś — kod.** Przeczytaj `karat/01-platforma.md` i `karat/03-kod-30.md` (razem ~20 min). Potem `./run.sh W1`, potem K1 na zegarze 30 min. Jak zostanie siła: K2.
+2. **Jutro — design i mock.** `karat/02-design-20.md`: 4 scenariusze na głos, 20 minut. Potem K3 na 30 minut, bez podpowiedzi i bez `coding/solutions`.
+3. **Rano w dzień rozmowy.** Tylko `karat/05-sciaga.md` i ewentualnie samo W1, żeby ręce pamiętały składnię. Nic nowego.
 
-Should (odróżnia seniora):
+Jak masz tylko jeden wieczór: W1 + K1 + dwa scenariusze (SPOF i notyfikacje) + ściąga. K2 rano, jeśli zdążysz. K3 tylko gdy K1 jest zielone.
 
-- Kafka transactions / EOS ograniczenia
-- rebalance storms, poison pill + DLQ
-- AZ blast radius, Multi-AZ, RPO/RTO
-- HPA vs replica Kafka (nie skalujesz konsumentów w ciemno)
+## Mapa plików
 
-Skip (nie na te 14 dni):
+| Plik | Po co |
+|---|---|
+| `karat/01-platforma.md` | Jak wygląda rozmowa, co wolno, redo |
+| `karat/02-design-20.md` | 20 minut scenariuszy, nie whiteboard |
+| `karat/03-kod-30.md` | Protokół kodowania i zdania po angielsku |
+| `karat/04-java-minimum.md` | Java, którą trzeba napisać bez szukania |
+| `karat/05-sciaga.md` | Jedyna kartka w dzień rozmowy |
+| `coding/` | W1, K1, K2, K3. Rozwiązania w `coding/solutions/`, dopiero po zegarze |
+| `01`–`08`, `P01`–`P07` | Etap po Karacie. Nie dziś |
 
-- CKA, Helm charts od zera, operator pattern
-- VPC peering + Transit Gateway w detalach
-- Kafka MirrorMaker internals
-- Virtual threads JEP-y na pamięć
-
----
-
-## Zasady treningu
-
-1. Coding zawsze ze **zegarem 40 min** i **narracją**.
-2. Design zawsze **na głos**, nawet sam. Piszesz API i liczby, nie tylko klocki.
-3. Po każdym zadaniu 5 min: co poszło źle, jedna poprawka.
-4. Nie otwieraj rozwiązań zanim nie minie 40 min albo nie utkniesz 15 min.
-5. Dzień 14 nic nowego. Nowy temat w przeddzień = fałszywy spokój.
-
-## Co NIE robić
-
-- 100 easy na LeetCode
-- Kurs Kubernetes 12h
-- DDIA od deski
-- Certyfikat AWS w 2 tygodnie
-- 20 historii behavioral
-
-## Jak ze mną pracować w tych 14 dniach
-
-Ty wrzucasz rozwiązanie (kod albo design mówiony). Ja gram interviewerem: przerywam, dopytuję, oceniam jak na rozmowie, daję następne.
-
-Dzisiejszy start: **P01 i P02** w `coding/`. Protokół w `02-coding-patterns.md`.
+Jak utkniesz, wklej kod i output `./run.sh`. Recenzja jest jak na rozmowie: co interviewer by przerwał, co jest bugiem, czy zdążysz na następną część.

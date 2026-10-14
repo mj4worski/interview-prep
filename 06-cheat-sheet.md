@@ -1,3 +1,7 @@
+# Stary cheat sheet — nie na Karat
+
+Na screen Karat czytasz tylko `karat/05-sciaga.md`. To, co jest niżej, jest na rozmowę z zespołem po screenie.
+
 # Ściąga na 20 minut przed rozmową
 
 ## Coding — 8 linijek w głowie

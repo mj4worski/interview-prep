@@ -1,3 +1,7 @@
+# Nie na screen Karat
+
+20 minut na Karacie to krótkie scenariusze z `karat/02-design-20.md`. Ta rama jest na 45 minut i na rozmowę z zespołem, już po screenie.
+
 # System design — rama + systemy, które wychodzą w 80% rozmów
 
 Masz 11 lat. Nie rysuj klocków. Prowadź decyzje.
