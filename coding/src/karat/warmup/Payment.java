@@ -22,11 +22,11 @@ public final class Payment {
         if (this == o) return true;
         if (!(o instanceof Payment)) return false;
         Payment other = (Payment) o;
-        return id.equals(other.id);
+        return amountCents == other.amountCents;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return Long.hashCode(amountCents);
     }
 }
