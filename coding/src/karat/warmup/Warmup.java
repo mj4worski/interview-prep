@@ -24,8 +24,8 @@ public final class Warmup {
             throw new IllegalArgumentException("amount");
         }
         String first = amount.substring(0, dot);
-        String second = amount.substring(dot+1);
-        if(second.length() != 2 || !allDigits(first) || !allDigits(second)){
+        String second = amount.substring(dot + 1);
+        if (second.length() != 2 || !allDigits(first) || !allDigits(second)) {
             throw new IllegalArgumentException("amount");
         }
 
@@ -33,11 +33,11 @@ public final class Warmup {
     }
 
     static boolean allDigits(String s) {
-        if(s.isEmpty()){
+        if (s.isEmpty()) {
             return false;
         }
-        for(int i = 0; i < s.length(); i++){
-            if(!Character.isDigit(s.charAt(i))){
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i))) {
                 return false;
             }
         }
