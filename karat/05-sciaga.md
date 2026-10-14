@@ -31,6 +31,8 @@ My hypothesis is ___. I'll change that one thing and rerun.
 - Najpierw plan, potem kod. Ich test, nie własny `toString`.
 - „Anything else?”: drugi risk, nie dłuższy opis pierwszego.
 - W logu są tylko wysłane notyfikacje: nieudane to różnica listy „miało pójść” i listy „doszło”.
+- „Ile serwerów na przyszły rok?”: ruch na użytkownika, peak do średniej, ile RPS niesie jedna instancja, ile danych zostaje.
+- Wolno przy większej liście: zagnieżdżona pętla, `+` na stringu w pętli, filtr dopiero po wczytaniu całości.
 
 ## JDK
 

@@ -23,6 +23,8 @@ Dwa braki, których nie ma w scenariuszach niżej, a wracają w relacjach:
 
 - Logujesz tylko wysłane notyfikacje. Nieudanych nie ma w logu, więc nie da się ich wygrepać. Lista id, które miały pójść, minus lista id, które doszły, to są te nieudane. Od teraz zapis próby powstaje przed wysyłką, razem z porażką.
 - Licznik, który dziś liczysz skanem dużej tabeli relacji (znajomi, polubienia). Trzymaj go przy rekordzie i aktualizuj przy zapisie. Cache na ten licznik, nie na całe skanowanie.
+- „Ile serwerów na przyszły rok?” Pada przy aplikacjach, nie przy bankach: rysunki dzieci, wideo, statystyki. Pytają, jakich liczb brakuje. Ruch na użytkownika, stosunek peak do średniej, ile żądań na sekundę niesie jedna instancja, ile danych zostaje i czy ruch rośnie liniowo. Bez tego „większe maszyny” jest zgadywaniem.
+- Odpowiedź jest wolna, a dane mogą być chwilę nieświeże. Cache: jaki klucz, jaki TTL, kiedy go kasujesz przy zapisie. Jedna gorąca pozycja nie może być jedynym kluczem na jednej instancji.
 
 Liczby podawaj tylko gdy oni podali liczby, albo jeden rząd wielkości, który zmienia decyzję („to nie wejdzie w ten sam Postgres”). Nie udawaj kalkulatora.
 
