@@ -84,6 +84,14 @@ Skip (nie na te 14 dni):
 - Certyfikat AWS w 2 tygodnie
 - 20 historii behavioral
 
+## Jak czytać teorię
+
+`06-cheat-sheet.md` zostaje ściągą na 20 minut przed rozmową.
+
+`01`–`05`, `02`, `07` i `08` mają mechanizm: co się dzieje krok po kroku, przykład i link. Kolejność i limity czasu są w `09-materialy.md`.
+
+Przeczytaj sekcję, zamknij plik, powiedz to w 60–90 sekund. Link otwierasz, gdy nie umiesz powtórzyć mechanizmu. Rozwiązań zadań nie otwieraj przed własnymi 40 minutami.
+
 ## Jak ze mną pracować w tych 14 dniach
 
 Ty wrzucasz rozwiązanie (kod albo design mówiony). Ja gram interviewerem: przerywam, dopytuję, oceniam jak na rozmowie, daję następne.

@@ -2,6 +2,8 @@
 
 Odpowiadaj w 45–90 sekund: definicja → dlaczego to boli w produkcji → przykład.
 
+Pod spodem jest mechanizm do tych pytań, które padają prawie zawsze. Linki i limity: `09-materialy.md`. Na dzień 3 blok B siadaj do Behlera o `@Transactional`, nie do całego spisu Springa.
+
 ## Java core (must)
 
 ### equals / hashCode
@@ -14,6 +16,18 @@ Kontrakt: równe obiekty → ten sam hash. Jeśli psujesz `hashCode`, `HashMap`/
 - Preferuj `record` / Guava / `Objects.hash`.
 
 Pułapka: `Id` encji JPA. equals po ID zanim encja ma ID = ból w Set. Często equals po business key albo w ogóle nie wkładasz encji do HashSet przed persistem.
+
+### Co HashMap robi z kontraktem
+
+`get` liczy hash, wybiera kubełek, w kubełku idzie po wpisach i woła `equals`. Dwa obiekty równe `equals` muszą trafić do tego samego kubełka, inaczej `get` ich nie znajdzie. Stąd: równe obiekty → ten sam `hashCode`. Odwrotność nie obowiązuje. Ten sam hash może mieć dwa różne obiekty, wtedy `equals` je rozróżnia. To jest kolizja, nie błąd.
+
+Złamanie, które widać na rozmowie: `equals` patrzy na `id` i `name`, `hashCode` tylko na `id`. Wstawiasz `("a", id=1)`, mutujesz nazwę na `"b"` w kopii, która `equals` mówi że równa, a hash już inny. Mapa nie znajduje klucza. Drugie złamanie: klucz mutowalny. Włożyłeś go, zmieniłeś pole użyte w hashu, wpis zostaje w starym kubełku.
+
+Encja JPA przed `persist` ma `id == null`. Dwie takie encje są równe, jeśli equals jest po id. `HashSet` traktuje je jako jeden element. Po zapisie dostają różne id i zbiór, który już je „ma”, jest niespójny z equals. Dlatego albo equals po kluczu biznesowym, który istnieje od konstrukcji, albo nie wkładasz encji do hasha przed persistem.
+
+`record` dostaje equals i hashCode ze składowych. Dopóki składowe są niemutowalne, klucz w mapie jest bezpieczny.
+
+Tekst z kontraktowymi przykładami: [equals i hashCode](https://www.baeldung.com/java-equals-hashcode-contract).
 
 ### Collections — co wybrać
 
@@ -92,6 +106,16 @@ Powiedz: bounded queue + rejection policy. Nieograniczona `LinkedBlockingQueue` 
 
 Zapis przed unlock jest widoczny po lock. To samo: volatile write → read, start/join wątku, completion Future.
 
+### Co z tego wynika w kodzie
+
+Wątek nie ma obowiązku widzieć zapisu innego wątku „od razu”. Bez relacji happens-before kompilator i CPU wolno trzymać wartość w rejestrze. Pętla `while (running)` na zwykłym `boolean running` może kręcić się w nieskończoność, mimo że inny wątek ustawił `running = false`. `volatile` na tym polu wstawia relację: zapis volatile dzieje się przed kolejnym odczytem volatile tego pola.
+
+`volatile` nie skleja kilku operacji. `volatile int i; i++` to odczyt, dodanie, zapis. Dwa wątki gubią zwiększenia. `AtomicInteger.incrementAndGet` robi to jedną operacją CAS: „jeśli wciąż widzę starą wartość, podmień na nową, inaczej powtórz”. Przy liczniku, w który wszyscy walą, CAS się tłucze i `LongAdder` rozkłada licznik na kilka komórek, sumowanych przy odczycie.
+
+`synchronized` daje i wzajemne wykluczenie, i happens-before: wszystko zapisane przed zwolnieniem monitora jest widoczne po jego zajęciu. To jest powód, dla którego „wystarczy volatile” pada przy strukturze z kilku pól. Lista „dodaj węzeł” pod volatile samego referera i tak potrafi być widziana w kawałku.
+
+Krótko, bez całej książki o JMM: [Jenkov — Java Memory Model](https://jenkov.com/tutorials/java-concurrency/java-memory-model.html), sekcje o volatile i o blokadzie.
+
 ### Deadlock
 
 4 warunki: mutual exclusion, hold&wait, no preemption, circular wait.
@@ -152,6 +176,28 @@ Powiedz w tej kolejności:
 6. Transakcja tylko na public method z zewnątrz beana.
 7. Długa transakcja + HTTP call w środku = trzymasz połączenie z puli. Zło.
 
+### Co się dzieje przy wywołaniu
+
+Kontener nie owija Twojego obiektu magią w środku metody. Przy starcie tworzy proxy: albo JDK proxy (interfejs), albo podklasę CGLIB. Do innych beanów wstrzykuje proxy, nie goły obiekt.
+
+Wywołanie z zewnątrz:
+
+1. Wchodzi w proxy.
+2. `TransactionInterceptor` woła `PlatformTransactionManager.getTransaction`.
+3. Menadżer bierze połączenie z puli, wyłącza auto-commit, ewentualnie dołącza do transakcji, która już wisi na tym wątku (`REQUIRED`).
+4. Woła Twoją metodę.
+5. Brak wyjątku: commit. Wyjątek z listy rollback: rollback. Potem połączenie wraca do puli.
+
+`this.metoda()` w tej samej klasie idzie po referencji `this`, która jest celem, nie proxy. Interceptor nie startuje. Dlatego prywatna metoda i wywołanie wewnętrzne nie dostaną transakcji, nawet z adnotacją. `@Transactional` na metodzie niepublicznej też nie, bo proxy nie umie jej przechwycić z zewnątrz.
+
+Domyślna reguła rollbacku: `RuntimeException` i `Error` cofają, checked exception commituje. To zaskakuje przy `IOException` z klienta HTTP w środku metody, która zdążyła zrobić `UPDATE`. `rollbackFor = Exception.class` na granicy use-case jest świadomym wyborem, powiedz go.
+
+`REQUIRES_NEW` zawiesza bieżącą transakcję i otwiera drugą, na drugim połączeniu. Wewnętrzny commit jest widoczny, nawet gdy zewnętrzny potem się wywali. Używasz tego do „zapisz audyt niezależnie od biznesu”. Nie używasz tego, żeby ominąć lock, który sam trzymasz na pierwszym połączeniu: drugie połączenie będzie na ten lock czekać, aż pierwsze skończy, a pierwsze czeka na drugie. To jest deadlock z propagacji, nie z bazy „samej z siebie”.
+
+Połączenie jest zajęte od wejścia w metodę do commitu. HTTP w środku, na 2 sekundy, przy puli 20 i 50 równoległych requestach, kończy się kolejką po połączenie, podczas gdy baza nic nie liczy. Wzorzec: transakcja na zapisie, wołanie sieci poza nią, idempotentny zapis wyniku.
+
+Na dzień 3: [Marco Behler, @Transactional](https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth). Ściąga atrybutów: [dokumentacja](https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html).
+
 ### Spring MVC / Boot
 
 - `@RestController` = `@Controller` + `@ResponseBody`
@@ -167,6 +213,16 @@ Powiedz w tej kolejności:
 - N+1: `join fetch` / `@EntityGraph` / batch size. Najpierw loguj SQL (`show-sql` nie na prod, p6spy / datasource-proxy)
 - `save()` na nowej encji vs detached — wiedz różnicę persist/merge
 - OSIV (`open-in-view`) default w Boot = leniwe dociąganie w widoku. Na API często wyłączasz.
+
+### N+1 jako ślad SQL
+
+`orderRepository.findAll()` robi `SELECT * FROM orders`. W pętli `order.getCustomer().getName()` przy `FetchType.LAZY` odpala osobny `SELECT * FROM customers WHERE id=?` na każde zamówienie. 200 zamówień = 201 zapytań. Persistence context (L1) w tej samej transakcji deduplikuje po id encji, więc ten sam klient nie poleci dwa razy. Stu różnych klientów poleci sto razy.
+
+`JOIN FETCH` w JPQL dokleja klienta w tym samym SELECT. `@EntityGraph` robi to samo bez ręcznego joinu. `@BatchSize` albo `hibernate.default_batch_fetch_size` zbija dociągnięcia do `WHERE id IN (...)`. Najpierw włącz log SQL (datasource-proxy, p6spy), potem wybieraj. `show-sql` na produkcji zostaw wyłączone.
+
+LAZY poza sesją rzuca `LazyInitializationException`, bo nie ma już połączenia, którym dałoby się dociągnąć. OSIV (`spring.jpa.open-in-view=true`, domyślnie w Boot) trzyma sesję przez cały request HTTP, więc widok albo serializer Jacksona dociąga leniwie i wygląda, jakby problemu nie było. Koszt: połączenie wisi od kontrolera do końca zapisu odpowiedzi, a N+1 chowa się w serializacji. Na API wyłączasz OSIV i oddajesz DTO złożone w transakcji.
+
+[N+1](https://vladmihalcea.com/n-plus-1-query-problem/), [open-in-view](https://vladmihalcea.com/the-open-session-in-view-anti-pattern/).
 
 ### Spring Security (wystarczy szkic)
 

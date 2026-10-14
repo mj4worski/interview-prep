@@ -6,6 +6,8 @@ cd coding
 ./run.sh        # wszystkie
 ```
 
+Teoria wzorców (mechanizm, nie sama ściąga) jest w `../02-coding-patterns.md`. Linki i limity czasu: `../09-materialy.md`. Rozwiązań z internetu nie otwieraj przed własnymi 40 minutami.
+
 Zasady jak na HackerRank:
 
 1. Włącz zegar 40 min zanim otworzysz plik.
