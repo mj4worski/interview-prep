@@ -35,4 +35,4 @@ Nie otwieraj P01. Nie otwieraj Kafki.
 
 ## Po screenie
 
-Dopiero `01-system-design.md`, `03-java-spring.md`, `07-kafka-aws-k8s.md` i P01–P07. To jest pętla z zespołem, nie Karat.
+Dopiero `09-materialy.md` (kolejność 14 dni i linki), `01-system-design.md`, `03-java-spring.md`, `07-kafka-aws-k8s.md` i P01–P07. To jest pętla z zespołem, nie Karat. Dziś nie startujesz od P01.

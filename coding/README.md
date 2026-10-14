@@ -17,3 +17,5 @@ Edytujesz pliki w `src/karat/`. Testów nie ruszasz.
 `solutions/` dopiero po zegarze. Protokół: `../karat/03-kod-30.md`.
 
 `src/interview/p01` … `p07` to stary zestaw. Nie na ten screen. `./run.sh P01`.
+
+Teoria wzorców na później, nie na dzisiejszy zegar: `../02-coding-patterns.md` i `../09-materialy.md`.

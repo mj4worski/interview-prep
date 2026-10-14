@@ -12,6 +12,26 @@ Po długim stażu boją się dwóch rzeczy: że utknąłeś i że nie umiesz opo
 Zakazane: "my jako zespół zrobiliśmy microservices".
 Wymagane: "ja zaproponowałem X, przekonałem Y, wynik Z".
 
+### Jak to brzmi, gdy jest puste, i gdy jest Twoje
+
+Puste, mimo poprawnego STAR: „Mieliśmy problem z wydajnością. Zespół zoptymalizował zapytania. Było lepiej.” Interviewer nie umie Cię zatrudnić, bo nie słyszy decyzji.
+
+Twoje, ten sam szkielet, liczby do podmiany: „Endpoint zamówień miał p99 1,8 s przy 40 RPS. Wziąłem log SQL i EXPLAIN. Na liście było 201 zapytań, N+1 na pozycjach. Zrobiłem join fetch i indeks `(status, created_at)`. p99 zszedł do 180 ms, bez dokładania instancji. Tradeoff: DTO zamiast encji w API, bo przy fetchu graf się rozjeżdżał.”
+
+Cztery rzeczy, które w drugim tekście są, a w pierwszym ich nie ma: skala, narzędzie którym mierzyłeś, decyzja w pierwszej osobie, liczba po zmianie i koszt tej decyzji.
+
+### Jak ćwiczyć
+
+Na kartce, nie w głowie. Na każdą z sześciu historii trzy linijki: liczba, czasownik (zmierzyłem, zaproponowałem, wyłączyłem, zostałem przy), tradeoff. Potem 90 sekund na głos, telefon z nagraniem. Słuchasz raz. Jeśli w nagraniu jest „my” i nie ma liczby, skreślasz i nagrywasz jeszcze raz. Cudze historie z blogów brzmią gładko i sypią się na dopytaniu „jaki był wolumen”.
+
+Dopytania, na które masz mieć drugie zdanie:
+
+- „Co byś zrobił inaczej?” — jedna konkretna rzecz, nie „lepiej skomunikował”.
+- „Kto był przeciw i co go przekonało?” — metryka albo ryzyko z datą, nie autorytet.
+- „Jaki był koszt Twojej decyzji?” — wolniejszy zapis, tydzień dłużej, gorszy p99 gdzie indziej. Decyzja bez kosztu brzmi jak slajd.
+
+[Behavioral interview](https://www.techinterviewhandbook.org/behavioral-interview/) — struktura i lista pytań, 20 minut. Potem zamykasz i wracasz do swoich sześciu kartek.
+
 ## 6 historii, które musisz mieć na kartce
 
 Wypełnij własne fakty. Poniżej szablony — podmień nawiasy.

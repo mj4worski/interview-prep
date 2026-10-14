@@ -57,6 +57,6 @@ Jak masz tylko jeden wieczór: W1 + K1 + dwa scenariusze (SPOF i notyfikacje) + 
 | `karat/04-java-minimum.md` | Java, którą trzeba napisać bez szukania |
 | `karat/05-sciaga.md` | Jedyna kartka w dzień rozmowy |
 | `coding/` | W1, K1, K2, K3. Rozwiązania w `coding/solutions/`, dopiero po zegarze |
-| `01`–`08`, `P01`–`P07` | Etap po Karacie. Nie dziś |
+| `01`–`09`, `P01`–`P07` | Etap po Karacie. Kolejność i linki: `09-materialy.md`. Nie dziś |
 
 Jak utkniesz, wklej kod i output `./run.sh`. Recenzja jest jak na rozmowie: co interviewer by przerwał, co jest bugiem, czy zdążysz na następną część.
