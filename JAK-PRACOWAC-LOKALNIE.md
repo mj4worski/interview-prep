@@ -10,6 +10,22 @@ chmod +x run.sh
 ./run.sh W1
 ```
 
+Potrzebny JDK 11 albo nowszy. AdoptOpenJDK 8 wywali się na `javac: invalid flag: --release`. Na Macu:
+
+```bash
+brew install --cask temurin@21
+/usr/libexec/java_home -v 21
+```
+
+`./run.sh` sam wybierze Temurin 21, nawet gdy `java` w PATH nadal jest 1.8. Żeby terminal też widział 21, w `~/.zshrc` zostaw tylko:
+
+```bash
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export PATH="$JAVA_HOME/bin:$PATH"
+```
+
+i usuń starą ścieżkę AdoptOpenJDK 8. Potem `./run.sh --jdk` powinno pokazać 21.
+
 Start od `README.md`, potem `karat/01-platforma.md`. Nie od P01.
 
 Źródło jest na GitHubie: `mj4worski/interview-prep`. Branch z tym screenem: `cursor/karat-interview-rebuild-57c3`.

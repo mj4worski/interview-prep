@@ -17,6 +17,8 @@ cd coding
 ./run.sh W1
 ```
 
+JDK 8 tego nie skompiluje (`invalid flag: --release`). Na Macu: `brew install --cask temurin@21`. Szczegóły: `JAK-PRACOWAC-LOKALNIE.md`.
+
 ## Co jest na screenach
 
 Godzina z interviewerem Karat (nie z Goldmanem). Z tego **50 minut** jest oceniane. Intro jest poza tym czasem.
